@@ -1,0 +1,62 @@
+.sets
+  padding: 8px
+
+  > .set
+    + .set
+      margin-top: 8px
+  
+.set
+  align-items: center
+  border: solid 1px #eee
+  border-radius: var(--radius)
+  display: flex
+  padding: 8px
+
+  > header
+    &::after
+      content: '='
+      margin: 0 8px
+      opacity: .5
+
+    input
+      all: unset
+      border-radius: var(--radius)
+      font-size: 1em
+      font-weight: bold
+      line-height: 1em
+      padding: 4px
+      text-align: center
+      text-transform: uppercase
+      transition: all .3s ease
+      width: 1.2em
+
+      &:hover, &:focus
+        background: #eee
+
+  > main
+    align-items: center
+    display: flex
+
+    &::before
+      content: '{'
+      margin-right: 4px
+
+    &::after
+      content: '}'
+      margin-left: 4px
+
+    input
+      all: unset
+      border: solid 1px transparent
+      font-family: monospace
+      min-width: 0
+      outline: none
+      padding: 0 4px
+      width: min-content
+
+      &:hover, &:focus
+        border-color: #eee
+
+  > footer
+    color: #ababab
+    margin-left: auto

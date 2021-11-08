@@ -1,0 +1,102 @@
+
+.matrix
+  $size: 26px
+
+  align-items: center
+  display: flex
+  user-select: none
+
+  > header
+    transform: translateY($size / 2)
+
+    &::after
+      content: '='
+      margin: 0 4px
+
+    span
+      display: inline-block
+      font-size: .8em
+      transform: translateY(25%)
+
+  > main
+    position: relative
+    min-height: 30px
+    min-width: 30px
+    padding-left: $size
+    padding-top: $size
+
+    .domain > div,
+    .range > div,
+    .row > div
+      align-items: center
+      display: flex
+      height: $size
+      justify-content: center
+      line-height: 1em
+      text-align: center
+      width: $size
+
+      > span
+        display: block
+
+    .domain,
+    .range
+      display: flex
+      left: 0
+      position: absolute
+      top: 0
+
+      > div
+        opacity: .6
+        transform: scale(.8)
+
+        &.hovered
+          font-weight: bold
+          opacity: 1
+          transform: scale(1)
+
+    .domain
+      flex-direction: column
+
+      .hovered
+        color: blue
+
+    .range
+      .hovered
+        color: red
+
+    .table
+      position: relative
+
+      &::before,
+      &::after
+        border: solid 2px black
+        box-sizing: border-box
+        content: ''
+        display: block
+        height: 100%
+        pointer-events: none
+        position: absolute
+        top: 0
+        width: 6px
+
+      &::before
+        border-right: none
+        left: 0
+
+      &::after
+        border-left: none
+        right: 0
+
+      .row
+        display: flex
+
+        > div
+          cursor: pointer
+
+          &:hover
+            transform: scale(1.2)
+
+  > .empty
+    padding-left: $size
+    padding-top: $size

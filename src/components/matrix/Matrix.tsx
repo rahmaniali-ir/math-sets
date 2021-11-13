@@ -70,6 +70,7 @@ const Matrix = ({ name, domain, range, relation, changed }: Props) => {
                 key={ri}
                 onMouseEnter={() => onMouseHover(d, r)}
                 onClick={() => onToggle(d, r)}
+                title={`(${d}, ${r})`}
               >
                 <span>{getRelation(d, r) ? "1" : "0"}</span>
               </div>

@@ -17,7 +17,7 @@ const Collections = () => {
       ))}
 
       <button className='add' onClick={addCollection}>
-        Add
+        Add Set
       </button>
     </div>
   )

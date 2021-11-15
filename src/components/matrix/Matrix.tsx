@@ -11,7 +11,7 @@ type Props<T = any> = {
   changed?: Function
 }
 
-const Matrix = ({ name, domain, range, relation, changed }: Props) => {
+const Matrix = ({ name, domain, range, relation, changed }: Props<string>) => {
   const [hovered, setHovered] = useState({ domain: null, range: null })
 
   const onMouseHover = useCallback(
@@ -27,14 +27,19 @@ const Matrix = ({ name, domain, range, relation, changed }: Props) => {
 
   const onToggle = useCallback(
     (d, r) => {
-      if (changed) changed(d, r)
+      if (changed) {
+        changed(d, r)
+
+        // force to rerender
+        setHovered(h => ({ ...h }))
+      }
     },
-    [changed]
+    [changed, setHovered]
   )
 
   const getRelation = useCallback(
     (d, r) => {
-      return relation.some(([rd, rr]) => {
+      return relation.nodes.some(([rd, rr]) => {
         return d === rd && r === rr
       })
     },

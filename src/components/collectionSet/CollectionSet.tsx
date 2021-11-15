@@ -64,7 +64,7 @@ const CollectionSet = ({ collection }: Props) => {
   )
 
   return (
-    <div className='set'>
+    <div className='box set'>
       <header>
         <input
           type='text'

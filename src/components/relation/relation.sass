@@ -1,0 +1,33 @@
+
+.relation
+  + .relation
+      margin-top: 8px
+
+  > header
+    align-items: center
+    display: flex
+    width: 100%
+
+    input
+      all: unset
+      border-radius: var(--radius)
+      font-size: 1em
+      font-weight: bold
+      line-height: 1em
+      padding: 4px
+      text-align: center
+      text-transform: uppercase
+      transition: all .3s ease
+      width: 1.2em
+
+      &:hover, &:focus
+        background: var(--accent)
+
+    .attributes
+      margin-left: auto
+
+  > main
+    margin-top: 8px
+
+    &.not-ready
+      color: #787878

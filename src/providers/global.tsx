@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer } from "react"
 import { Collection } from "../interfaces/collection"
+import { OrderedPair } from "../interfaces/relation"
 import { GlobalAction, GlobalReducer, GlobalState } from "./global.types"
 
 // state
@@ -14,7 +15,14 @@ const global: GlobalState = {
       name: "B",
     },
   ],
-  relations: [],
+  relations: [
+    {
+      name: "R",
+      source: "A",
+      target: "B",
+      nodes: [],
+    },
+  ],
 }
 
 const generateUniqueCollectionLetter = (state: GlobalState) => {
@@ -128,6 +136,58 @@ const reducer = (state: GlobalState, action: GlobalAction): GlobalState => {
         ...state,
         collections: newCollections,
       }
+    }
+
+    case "UPDATE_RELATION_SOURCE": {
+      const relIndex = state.relations.findIndex(
+        rel => rel.name === action.payload.name
+      )
+
+      if (state.relations[relIndex].source === action.payload.source)
+        return state
+
+      const newRelations = state.relations.map((coll, index) => {
+        return index === relIndex
+          ? { ...coll, source: action.payload.source, nodes: [] }
+          : coll
+      })
+
+      return { ...state, relations: newRelations }
+    }
+
+    case "UPDATE_RELATION_TARGET": {
+      const relIndex = state.relations.findIndex(
+        rel => rel.name === action.payload.name
+      )
+
+      if (state.relations[relIndex].target === action.payload.target)
+        return state
+
+      const newRelations = state.relations.map((coll, index) => {
+        return index === relIndex
+          ? { ...coll, target: action.payload.target, nodes: [] }
+          : coll
+      })
+
+      return { ...state, relations: newRelations }
+    }
+
+    case "TOGGLE_RELATION_NODE": {
+      const relIndex = state.relations.findIndex(
+        relation => relation.name === action.payload.name
+      )
+      const rel = state.relations[relIndex]
+      const [d, r]: OrderedPair<string> = action.payload.node
+
+      const exists = rel.nodes.some(node => node[0] === d && node[1] === r)
+
+      if (exists) {
+        rel.nodes = rel.nodes.filter(node => !(node[0] === d && node[1] === r))
+      } else {
+        rel.nodes = [...rel.nodes, [d, r]]
+      }
+
+      return { ...state }
     }
 
     default:

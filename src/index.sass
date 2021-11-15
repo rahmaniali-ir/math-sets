@@ -1,6 +1,9 @@
 \:root
+  --background: #fff
+  --accent: #ddd
   --primary: #2fa4d3
-  --radius: 8px
+  --primary: #E1490C
+  --radius: 12px
 
 *
   box-sizing: border-box
@@ -14,10 +17,25 @@ body
 code
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace
 
+.flex-align
+  align-items: center
+  display: flex
+
+.box
+  align-items: center
+  border: solid 1px var(--accent)
+  border-radius: var(--radius)
+  display: flex
+  padding: 8px
+
+  &.column
+    align-items: flex-start
+    flex-direction: column
+
 button.add
   align-items: center
   background: none
-  border: dashed 2px #eee
+  border: dashed 2px var(--accent)
   border-radius: var(--radius)
   cursor: pointer
   display: flex

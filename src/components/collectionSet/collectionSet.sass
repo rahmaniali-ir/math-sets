@@ -1,10 +1,4 @@
 .set
-  align-items: center
-  border: solid 1px #eee
-  border-radius: var(--radius)
-  display: flex
-  padding: 8px
-
   > header
     &::after
       content: '='
@@ -24,7 +18,7 @@
       width: 1.2em
 
       &:hover, &:focus
-        background: #eee
+        background: var(--accent)
 
   > main
     align-items: center
@@ -60,7 +54,7 @@
 
     input
       all: unset
-      background: #eee
+      background: var(--accent)
       border: solid 1px transparent
       border-radius: var(--radius)
       font-family: monospace

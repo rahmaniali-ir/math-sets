@@ -41,6 +41,14 @@ const collectionLetterExists = (state: GlobalState, name: string) => {
   return state.collections.some(collection => collection.name === name)
 }
 
+const getCollectionIndex = (state: GlobalState, name: string) => {
+  return state.collections.findIndex(collection => collection.name === name)
+}
+
+const getRelationIndex = (state: GlobalState, name: string) => {
+  return state.relations.findIndex(relation => relation.name === name)
+}
+
 // reducer
 const reducer = (state: GlobalState, action: GlobalAction): GlobalState => {
   switch (action.type) {
@@ -54,8 +62,9 @@ const reducer = (state: GlobalState, action: GlobalAction): GlobalState => {
     }
 
     case "ADD_TO_COLLECTION": {
-      const collectionIndex = state.collections.findIndex(
-        collection => collection.name === action.payload.collection
+      const collectionIndex = getCollectionIndex(
+        state,
+        action.payload.collection
       )
 
       const newElements = action.payload.input
@@ -89,9 +98,7 @@ const reducer = (state: GlobalState, action: GlobalAction): GlobalState => {
 
       if (collectionLetterExists(state, name)) return state
 
-      const collectionIndex = state.collections.findIndex(
-        collection => collection.name === action.payload.collection
-      )
+      const collectionIndex = getCollectionIndex(state, action.payload.name)
 
       const newCollections: Collection[] = state.collections.map(
         (collection, index) =>
@@ -104,9 +111,7 @@ const reducer = (state: GlobalState, action: GlobalAction): GlobalState => {
     }
 
     case "REMOVE_COLLECTION": {
-      const collectionIndex = state.collections.findIndex(
-        collection => collection.name === action.payload.name
-      )
+      const collectionIndex = getCollectionIndex(state, action.payload.name)
 
       return {
         ...state,
@@ -117,9 +122,7 @@ const reducer = (state: GlobalState, action: GlobalAction): GlobalState => {
     }
 
     case "REMOVE_FROM_COLLECTION": {
-      const collectionIndex = state.collections.findIndex(
-        collection => collection.name === action.payload.name
-      )
+      const collectionIndex = getCollectionIndex(state, action.payload.name)
 
       const newCollections = state.collections.map((collection, index) => {
         return index === collectionIndex
@@ -139,9 +142,7 @@ const reducer = (state: GlobalState, action: GlobalAction): GlobalState => {
     }
 
     case "UPDATE_RELATION_SOURCE": {
-      const relIndex = state.relations.findIndex(
-        rel => rel.name === action.payload.name
-      )
+      const relIndex = getRelationIndex(state, action.payload.name)
 
       if (state.relations[relIndex].source === action.payload.source)
         return state
@@ -156,9 +157,7 @@ const reducer = (state: GlobalState, action: GlobalAction): GlobalState => {
     }
 
     case "UPDATE_RELATION_TARGET": {
-      const relIndex = state.relations.findIndex(
-        rel => rel.name === action.payload.name
-      )
+      const relIndex = getRelationIndex(state, action.payload.name)
 
       if (state.relations[relIndex].target === action.payload.target)
         return state
@@ -173,9 +172,7 @@ const reducer = (state: GlobalState, action: GlobalAction): GlobalState => {
     }
 
     case "TOGGLE_RELATION_NODE": {
-      const relIndex = state.relations.findIndex(
-        relation => relation.name === action.payload.name
-      )
+      const relIndex = getRelationIndex(state, action.payload.name)
       const rel = state.relations[relIndex]
       const [d, r]: OrderedPair<string> = action.payload.node
 

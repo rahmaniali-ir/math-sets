@@ -2,8 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from "react"
 import { Relation as Rel } from "../../interfaces/relation"
 import { useGlobal } from "../../providers/global"
 import Chips from "../chips/Chips"
-import Icon from "../icon/Icon"
 import Matrix from "../matrix/Matrix"
+import Diagram from "../diagram/Diagram"
 import SelectRelation from "../selectRelation/SelectRelation"
 import "./relation.sass"
 
@@ -37,6 +37,11 @@ const Relation = ({ relation }: Props) => {
       relation.nodes.length === domainSet.length * rangeSet.length
     )
   }, [relation.nodes.length, domainSet, rangeSet])
+
+  useEffect(() => {
+    if (relation.source) setSource(relation.source)
+    if (relation.target) setTarget(relation.target)
+  }, [relation.source, relation.target, setSource, setTarget])
 
   const onSourceChange = useCallback(
     (collection: string) => {
@@ -105,6 +110,8 @@ const Relation = ({ relation }: Props) => {
             range={rangeSet!}
             changed={onMatrixToggle}
           />
+
+          <Diagram relation={relation} />
         </main>
       )}
     </div>

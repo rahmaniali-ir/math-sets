@@ -40,7 +40,7 @@ const SelectRelation = ({ changed }: Props) => {
 
       setOpen(!open)
     },
-    [open, setOpen, setSelected]
+    [open, setOpen, setSelected, changed]
   )
 
   return (

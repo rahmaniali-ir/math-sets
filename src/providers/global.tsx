@@ -147,9 +147,24 @@ const reducer = (state: GlobalState, action: GlobalAction): GlobalState => {
           : collection
       })
 
+      const relations = state.relations.map(rel => {
+        if (rel.source === action.payload.name)
+          rel.nodes = rel.nodes.filter(
+            node => node[0] !== action.payload.element
+          )
+
+        if (rel.target === action.payload.name)
+          rel.nodes = rel.nodes.filter(
+            node => node[1] !== action.payload.element
+          )
+
+        return rel
+      })
+
       return {
         ...state,
         collections: newCollections,
+        relations: relations,
       }
     }
 

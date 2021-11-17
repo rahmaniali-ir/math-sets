@@ -76,7 +76,7 @@ const Relation = ({ relation }: Props) => {
     <div className='box column relation'>
       <header className='flex-align'>
         <div className='flex-align relation-details'>
-          <input type='text' maxLength={1} defaultValue='R' />
+          <input type='text' maxLength={1} defaultValue={relation.name} />
           =
           <SelectRelation changed={coll => onSourceChange(coll)} />
           {"->"}

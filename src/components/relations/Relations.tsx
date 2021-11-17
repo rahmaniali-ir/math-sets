@@ -6,9 +6,9 @@ import "./relations.sass"
 const Relations = () => {
   const { state, dispatch } = useGlobal()
 
-  // const addCollection = useCallback(() => {
-  //   dispatch({ type: "ADD_COLLECTION" })
-  // }, [dispatch])
+  const addRelation = useCallback(() => {
+    dispatch({ type: "ADD_RELATION" })
+  }, [dispatch])
 
   return (
     <div className='relations'>
@@ -19,8 +19,12 @@ const Relations = () => {
       </main>
 
       <footer>
-        <button className='add'>Add Relation</button>
+        <button className='add' onClick={addRelation}>
+          Add Relation
+        </button>
       </footer>
+
+      {/* <pre>{JSON.stringify(state, null, 2)}</pre> */}
     </div>
   )
 }

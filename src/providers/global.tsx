@@ -37,6 +37,18 @@ const generateUniqueCollectionLetter = (state: GlobalState) => {
   } while (true)
 }
 
+const generateUniqueRelationLetter = (state: GlobalState) => {
+  const charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  const usedChars = state.relations.map(relation => relation.name)
+
+  if (usedChars.length === charSet.length) return ""
+
+  do {
+    const char = charSet[Math.floor(Math.random() * charSet.length)]
+    if (!usedChars.includes(char)) return char
+  } while (true)
+}
+
 const collectionLetterExists = (state: GlobalState, name: string) => {
   return state.collections.some(collection => collection.name === name)
 }
@@ -138,6 +150,18 @@ const reducer = (state: GlobalState, action: GlobalAction): GlobalState => {
       return {
         ...state,
         collections: newCollections,
+      }
+    }
+
+    case "ADD_RELATION": {
+      const name = generateUniqueRelationLetter(state)
+
+      return {
+        ...state,
+        relations: [
+          ...state.relations,
+          { name, source: "", target: "", nodes: [] },
+        ],
       }
     }
 

@@ -19,6 +19,7 @@ export type GlobalAction = Action<
   | "REMOVE_COLLECTION"
 
   // relations
+  | "ADD_RELATION"
   | "UPDATE_RELATION_SOURCE"
   | "UPDATE_RELATION_TARGET"
   | "TOGGLE_RELATION_NODE"

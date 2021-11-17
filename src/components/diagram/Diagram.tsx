@@ -72,6 +72,7 @@ const Diagram = ({ relation }: Props) => {
     const ctx = canvasRef.current!.getContext("2d")!
     ctx.textAlign = "center"
     ctx.textBaseline = "middle"
+    ctx.font = "14px sans-serif"
   }, [])
 
   useEffect(() => {

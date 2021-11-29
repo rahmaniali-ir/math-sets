@@ -22,6 +22,12 @@ function App() {
               Ali Rahmani
             </a>
           </strong>
+          <a href='https://github.com/rahmaniali-ir/math-sets'>
+            <img
+              src='https://img.shields.io/github/stars/rahmaniali-ir/math-sets?style=social'
+              alt='Github repo'
+            />
+          </a>
         </footer>
       </div>
     </GlobalProvider>
